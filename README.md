@@ -25,3 +25,15 @@ Utilizamos los siguientes datasets para realizar este trabajo. Será necesario c
 4. [Bicicleteros](https://data.buenosaires.gob.ar/dataset/bicicleteros-via-publica/resource/juqdkmgo-241-resource) (`bicicleteros.csv`)
 5. [Trips 2023](https://data.buenosaires.gob.ar/dataset/bicicletas-publicas/resource/ff671909-6860-4398-8d0a-8f2389cb2780) (`trips_2023.csv`)
 
+## Inicialización
+
+Lo primero es crear la base de datos sobre la cuál se va a trabajar y conectarse a ella. 
+
+```
+CREATE DATABASE olap_ecobici;
+\c olap_ecobici;
+```
+
+- Para crear los esquemas, se puede correr `schema.sql`
+- Para importar datos de los csv, se puede correr `load.sql`
+- Para correr cada consulta definida en el trabajo práctico, se puede correr `query-{subobjective}-{query}.sql`
