@@ -136,25 +136,23 @@ SELECT
 FROM temp_timestamps
 ON CONFLICT DO NOTHING;
 
-WITH random_users AS (
-    SELECT UserKey
-    FROM Users
-    ORDER BY random()
-)
 INSERT INTO BicycleTrips (UserKey, StartStation, EndStation, StartDate, EndDate)
-SELECT 
-    (SELECT UserKey FROM random_users ORDER BY random() LIMIT 1),  -- Assign a random UserKey
-    ss.StationKey, 
-    es.StationKey,
-    temp_trips.start_time, 
+SELECT
+    CAST(REGEXP_REPLACE(temp_trips.user_id, '[^0-9]', '', 'g') AS INT) AS UserKey,         
+    ss.StationKey,                                                                          
+    es.StationKey,                                                                         
+    temp_trips.start_time,                                                                 
     temp_trips.end_time
-FROM 
+FROM                   
     temp_trips
-JOIN 
-    Stations ss ON upper(TRIM(SPLIT_PART(start_station_name, '-', 2))) = upper(ss.Name)
-JOIN 
-    Stations es ON upper(TRIM(SPLIT_PART(end_station_name, '-', 2))) = upper(es.Name)
+JOIN
+    Users u ON CAST(REGEXP_REPLACE(temp_trips.user_id, '[^0-9]', '', 'g') AS INT) = u.UserKey
+JOIN          
+    Stations ss ON upper(TRIM(SPLIT_PART(temp_trips.start_station_name, '-', 2))) = upper(ss.Name)
+JOIN                                                                                   
+    Stations es ON upper(TRIM(SPLIT_PART(temp_trips.end_station_name, '-', 2))) = upper(es.Name)  
 ON CONFLICT (UserKey, StartStation, EndStation, StartDate, EndDate) DO NOTHING;
+
 
 DROP TABLE temp_timestamps; 
 DROP TABLE temp_trips; 
