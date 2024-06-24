@@ -151,7 +151,7 @@ SELECT
 FROM 
     temp_trips
 JOIN 
-    Stations ss ON upper(TRIM(SPLIT_PART(end_station_name, '-', 2))) = upper(ss.Name)
+    Stations ss ON upper(TRIM(SPLIT_PART(start_station_name, '-', 2))) = upper(ss.Name)
 JOIN 
     Stations es ON upper(TRIM(SPLIT_PART(end_station_name, '-', 2))) = upper(es.Name)
 ON CONFLICT (UserKey, StartStation, EndStation, StartDate, EndDate) DO NOTHING;
