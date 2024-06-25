@@ -17,5 +17,5 @@ total_station_usage AS (
 SELECT s.Name AS station_name, tsu.total_usage
 FROM total_station_usage tsu
 JOIN Stations s ON tsu.station_id = s.StationKey
-ORDER BY tsu.total_usage DESC
+ORDER BY tsu.total_usage ASC
 LIMIT 10;
