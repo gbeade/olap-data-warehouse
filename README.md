@@ -37,3 +37,4 @@ CREATE DATABASE olap_ecobici;
 - Para crear los esquemas, se puede correr `schema.sql`
 - Para importar datos de los csv, se puede correr `load.sql`
 - Para correr cada consulta definida en el trabajo práctico, se puede correr `query-{subobjective}-{query}.sql`
+- Para ver como crear la vista materializada expuesta en el trabajo, se puede correr `materialized-view.sql`
